@@ -1,7 +1,13 @@
 <?php
 include 'db_connect.php';
 
-$base_url = "http://172.20.10.2/helpdesk/report.php?pc_id=";
+// Dynamically generate the base URL to support both localhost and Railway
+$protocol = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on') || (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] === 'https') ? "https" : "http";
+$host = $_SERVER['HTTP_HOST'];
+$dir = dirname($_SERVER['PHP_SELF']);
+$dir = ($dir === '\\' || $dir === '/') ? '' : $dir;
+
+$base_url = $protocol . "://" . $host . $dir . "/report.php?pc_id=";
 ?>
 
 <!DOCTYPE html>
