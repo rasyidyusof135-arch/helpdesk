@@ -39,6 +39,48 @@ if (!isset($_SESSION['user_id'])) {
         }
         .print-header { display: none; }
 
+        /* --- RESPONSIVE TABLE (CARD STYLE FOR MOBILE) --- */
+        @media screen and (max-width: 767px) {
+            .table-responsive { border: none !important; }
+            table thead { display: none; }
+            table tbody tr {
+                display: flex;
+                flex-direction: column;
+                background-color: #fff;
+                margin-bottom: 15px;
+                border-radius: 8px;
+                box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+                padding: 15px;
+                border: 1px solid #eaeaea;
+            }
+            table tbody td {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                border: none;
+                padding: 10px 0;
+                border-bottom: 1px solid #f8f9fa;
+                text-align: right;
+            }
+            table tbody td::before {
+                content: attr(data-label);
+                font-weight: 600;
+                color: #555;
+                margin-right: 15px;
+                text-align: left;
+                flex-shrink: 0;
+            }
+            table tbody td:last-child {
+                border-bottom: none;
+                justify-content: flex-end;
+                gap: 10px;
+                padding-bottom: 0;
+            }
+            table tbody td:last-child::before { display: none; }
+            .ticket-table-section .card, .analytics-section .card { background: transparent; padding: 0 !important; box-shadow: none !important;}
+            .ticket-table-section .card-body, .analytics-section .card-body { padding: 0 !important; }
+        }
+
         /* --- CSS PRINT --- */
         @media print {
             body { background: white !important; color: black !important; box-shadow: none !important; }
@@ -124,16 +166,16 @@ if (!isset($_SESSION['user_id'])) {
                                         $email = !empty($row['reporter_email']) ? $row['reporter_email'] : '';
 
                                         echo "<tr>
-                                                <td>#{$row['id']}</td>
-                                                <td><strong>{$row['pc_name']}</strong><br><small>{$row['location']}</small></td>
-                                                <td>{$row['description']}</td>
-                                                <td>
+                                                <td data-label='ID'>#{$row['id']}</td>
+                                                <td data-label='PC Name & Location'><strong>{$row['pc_name']}</strong><br><small>{$row['location']}</small></td>
+                                                <td data-label='Issue'>{$row['description']}</td>
+                                                <td data-label='Reporter (Contact)'>
                                                     <strong>{$row['reporter_name']}</strong><br>
                                                     <a href='tel:$phone' class='text-decoration-none small'>📞 $phone</a><br>
                                                     <small class='text-muted'>$email</small>
                                                 </td>
-                                                <td><span class='badge rounded-pill $badge'>{$row['status']}</span></td>
-                                                <td>
+                                                <td data-label='Status'><span class='badge rounded-pill $badge'>{$row['status']}</span></td>
+                                                <td data-label='Actions'>
                                                     <a href='update_ticket.php?id={$row['id']}' class='btn btn-sm btn-primary'>Update</a>
                                                     <a href='history.php?pc_id={$row['asset_id']}' class='btn btn-sm btn-outline-dark'>History</a>
                                                 </td>
@@ -177,8 +219,8 @@ if (!isset($_SESSION['user_id'])) {
                                     $rec = ($row['total_issues'] > 2) ? "High Risk - Consider Upgrade" : "Normal Monitor";
                                     $color = ($row['total_issues'] > 2) ? "text-danger fw-bold" : "text-success";
                                     echo "<tr>
-                                            <td class='fw-bold'>{$row['pc_name']}</td><td class='text-center'>{$row['total_issues']}</td><td class='$color'>$rec</td>
-                                            <td class='no-print text-center'><a href='print_single.php?id={$row['id']}' target='_blank' class='btn btn-sm btn-outline-dark'>🖨️ Print</a></td>
+                                            <td class='fw-bold' data-label='PC Name'>{$row['pc_name']}</td><td class='text-center' data-label='Total Tickets'>{$row['total_issues']}</td><td class='$color' data-label='Recommendation'>$rec</td>
+                                            <td class='no-print text-center' data-label='Action'><a href='print_single.php?id={$row['id']}' target='_blank' class='btn btn-sm btn-outline-dark'>🖨️ Print</a></td>
                                           </tr>";
                                 }
                             } else { echo "<tr><td colspan='4'>No data available.</td></tr>"; }
