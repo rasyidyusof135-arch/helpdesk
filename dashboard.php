@@ -166,18 +166,27 @@ if (!isset($_SESSION['user_id'])) {
                                         $email = !empty($row['reporter_email']) ? $row['reporter_email'] : '';
 
                                         echo "<tr>
-                                                <td data-label='ID'>#{$row['id']}</td>
-                                                <td data-label='PC Name & Location'><strong>{$row['pc_name']}</strong><br><small>{$row['location']}</small></td>
-                                                <td data-label='Issue'>{$row['description']}</td>
-                                                <td data-label='Reporter (Contact)'>
-                                                    <strong>{$row['reporter_name']}</strong><br>
-                                                    <a href='tel:$phone' class='text-decoration-none small'>📞 $phone</a><br>
-                                                    <small class='text-muted'>$email</small>
+                                                <td data-label='ID'><div>#{$row['id']}</div></td>
+                                                <td data-label='PC Name & Location'>
+                                                    <div>
+                                                        <strong>{$row['pc_name']}</strong><br>
+                                                        <small>{$row['location']}</small>
+                                                    </div>
                                                 </td>
-                                                <td data-label='Status'><span class='badge rounded-pill $badge'>{$row['status']}</span></td>
+                                                <td data-label='Issue'><div>{$row['description']}</div></td>
+                                                <td data-label='Reporter (Contact)'>
+                                                    <div>
+                                                        <strong>{$row['reporter_name']}</strong><br>
+                                                        <a href='tel:$phone' class='text-decoration-none small'>📞 $phone</a><br>
+                                                        <small class='text-muted'>$email</small>
+                                                    </div>
+                                                </td>
+                                                <td data-label='Status'><div><span class='badge rounded-pill $badge'>{$row['status']}</span></div></td>
                                                 <td data-label='Actions'>
-                                                    <a href='update_ticket.php?id={$row['id']}' class='btn btn-sm btn-primary'>Update</a>
-                                                    <a href='history.php?pc_id={$row['asset_id']}' class='btn btn-sm btn-outline-dark'>History</a>
+                                                    <div>
+                                                        <a href='update_ticket.php?id={$row['id']}' class='btn btn-sm btn-primary mb-1'>Update</a>
+                                                        <a href='history.php?pc_id={$row['asset_id']}' class='btn btn-sm btn-outline-dark mb-1'>History</a>
+                                                    </div>
                                                 </td>
                                               </tr>";
                                     }
