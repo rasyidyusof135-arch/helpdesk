@@ -27,6 +27,7 @@ if (!$ticket) {
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Update Ticket #<?php echo $ticket['id']; ?></title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
@@ -40,13 +41,19 @@ if (!$ticket) {
             padding: 20px; 
             border-radius: 15px 15px 0 0; 
         }
+        @media (max-width: 576px) {
+            .container { padding-left: 10px; padding-right: 10px; }
+            .header-blue { padding: 15px; }
+            .header-blue h4 { font-size: 1.1rem; }
+            .card-body { padding: 1.25rem !important; }
+        }
     </style>
 </head>
 <body>
 
-<div class="container mt-5 mb-5">
+<div class="container mt-3 mt-md-5 mb-5">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-12 col-md-10 col-lg-8">
             
             <div class="card">
                 <div class="header-blue d-flex justify-content-between align-items-center">
@@ -54,7 +61,7 @@ if (!$ticket) {
                         <h4 class="mb-0 fw-bold">Update Ticket #<?php echo $ticket['id']; ?></h4>
                         <small>RBY Tech IT Helpdesk System</small>
                     </div>
-                    <a href="dashboard.php" class="btn btn-sm btn-light text-primary fw-bold px-3">Back to Dashboard</a>
+                    <a href="dashboard.php" class="btn btn-sm btn-light text-primary fw-bold px-3">Back</a>
                 </div>
                 
                 <div class="card-body p-4">

@@ -27,19 +27,61 @@ if (!$pc_info) {
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>History: <?php echo $pc_info['pc_name']; ?></title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Poppins', sans-serif; }
+        @media screen and (max-width: 767px) {
+            .table-responsive { border: none !important; }
+            table thead { display: none; }
+            table tbody tr {
+                display: flex;
+                flex-direction: column;
+                background-color: #fff;
+                margin-bottom: 15px;
+                border-radius: 8px;
+                box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+                padding: 15px;
+                border: 1px solid #eaeaea;
+            }
+            table tbody td {
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+                border: none !important;
+                padding: 10px 0 !important;
+                border-bottom: 1px solid #f8f9fa !important;
+                text-align: left;
+                word-break: break-word;
+            }
+            table tbody td::before {
+                content: attr(data-label);
+                font-weight: 700;
+                color: #333;
+                margin-bottom: 5px;
+                text-transform: uppercase;
+                font-size: 0.85em;
+                letter-spacing: 0.5px;
+            }
+            table tbody td:last-child {
+                border-bottom: none !important;
+            }
+            .h2-title { font-size: 1.5rem; }
+        }
+    </style>
 </head>
 <body class="bg-light">
 
-<div class="container mt-5">
+<div class="container mt-3 mt-md-5">
     
-    <div class="d-flex justify-content-between align-items-center mb-4">
-        <h2>
-            <span class="text-muted">History Log for:</span> 
+    <div class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center mb-4 gap-3">
+        <h2 class="h2-title mb-0">
+            <span class="text-muted">History Log:</span> 
             <?php echo $pc_info['pc_name']; ?>
         </h2>
-        <a href="dashboard.php" class="btn btn-secondary">Back to Dashboard</a>
+        <a href="dashboard.php" class="btn btn-secondary shadow-sm">Back</a>
     </div>
 
     <div class="card mb-4 border-info">
@@ -80,11 +122,11 @@ if (!$pc_info) {
                             $status_class = ($row['status'] == 'Closed') ? 'bg-success' : 'bg-warning text-dark';
 
                             echo "<tr>
-                                    <td>$date</td>
-                                    <td>{$row['reporter_name']}</td>
-                                    <td>{$row['description']}</td>
-                                    <td><em class='text-muted'>{$row['admin_remarks']}</em></td>
-                                    <td><span class='badge $status_class'>{$row['status']}</span></td>
+                                    <td data-label='Date Reported'>$date</td>
+                                    <td data-label='Reporter'>{$row['reporter_name']}</td>
+                                    <td data-label='Issue'>{$row['description']}</td>
+                                    <td data-label='Technician Remarks'><em class='text-muted'>{$row['admin_remarks']}</em></td>
+                                    <td data-label='Status'><span class='badge $status_class'>{$row['status']}</span></td>
                                   </tr>";
                         }
                     } else {

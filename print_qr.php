@@ -14,15 +14,24 @@ $base_url = $protocol . "://" . $host . $dir . "/report.php?pc_id=";
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Print QR Codes</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
+        body { font-family: 'Poppins', sans-serif; }
         /* CSS untuk paparan Grid Sticker */
         .qr-container {
             display: grid;
-            grid-template-columns: repeat(3, 1fr); /* 3 sticker sebaris */
+            grid-template-columns: repeat(3, 1fr); /* 3 sticker sebaris on desktop */
             gap: 20px;
             margin-top: 20px;
+        }
+        @media (max-width: 992px) {
+            .qr-container { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 576px) {
+            .qr-container { grid-template-columns: 1fr; }
         }
         .qr-card {
             border: 2px dashed #333;
