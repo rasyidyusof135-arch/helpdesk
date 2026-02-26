@@ -55,26 +55,30 @@ if (!isset($_SESSION['user_id'])) {
             }
             table tbody td {
                 display: flex;
-                justify-content: space-between;
-                align-items: center;
+                flex-direction: column;
+                align-items: flex-start;
                 border: none;
-                padding: 10px 0;
+                padding: 12px 0;
                 border-bottom: 1px solid #f8f9fa;
-                text-align: right;
+                text-align: left;
+                word-break: break-word;
             }
             table tbody td::before {
                 content: attr(data-label);
-                font-weight: 600;
-                color: #555;
-                margin-right: 15px;
-                text-align: left;
-                flex-shrink: 0;
+                font-weight: 700;
+                color: #333;
+                margin-bottom: 5px;
+                text-transform: uppercase;
+                font-size: 0.85em;
+                letter-spacing: 0.5px;
             }
             table tbody td:last-child {
                 border-bottom: none;
-                justify-content: flex-end;
+                flex-direction: row;
+                justify-content: flex-start;
                 gap: 10px;
                 padding-bottom: 0;
+                margin-top: 10px;
             }
             table tbody td:last-child::before { display: none; }
             .ticket-table-section .card, .analytics-section .card { background: transparent; padding: 0 !important; box-shadow: none !important;}
