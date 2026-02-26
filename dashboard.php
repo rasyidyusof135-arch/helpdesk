@@ -229,8 +229,8 @@ if (!isset($_SESSION['user_id'])) {
                             $res_stats = $conn->query($sql_stats);
                             if ($res_stats && $res_stats->num_rows > 0) {
                                 while($row = $res_stats->fetch_assoc()) {
-                                    $rec = ($row['total_issues'] > 2) ? "High Risk - Consider Upgrade" : "Normal Monitor";
-                                    $color = ($row['total_issues'] > 2) ? "text-danger fw-bold" : "text-success";
+                                    $rec = ($row['total_issues'] > 4) ? "High Risk - Consider Upgrade" : "Normal Monitor";
+                                    $color = ($row['total_issues'] > 4) ? "text-danger fw-bold" : "text-success";
                                     echo "<tr>
                                             <td class='fw-bold' data-label='PC Name'>{$row['pc_name']}</td><td class='text-center' data-label='Total Tickets'>{$row['total_issues']}</td><td class='$color' data-label='Recommendation'>$rec</td>
                                             <td class='no-print text-center' data-label='Action'><a href='print_single.php?id={$row['id']}' target='_blank' class='btn btn-sm btn-outline-dark'>🖨️ Print</a></td>
